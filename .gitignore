@@ -1,0 +1,12 @@
+# Kit de marca original de JAPI: fuentes vectoriales, PDF y el ZIP recibido.
+# Son archivos propietarios del cliente, no van al repositorio.
+# Anclado a la raiz: calvin/assets/brand/ si debe versionarse.
+/brand/
+
+# Scratch
+doms.txt
+
+# Sistema
+desktop.ini
+Thumbs.db
+.DS_Store

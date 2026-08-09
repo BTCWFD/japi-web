@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Monograma CP de Calvin Parra">
+  <circle cx="100" cy="100" r="93" fill="none" stroke="#0C0C0E" stroke-width="1.5"/>
+  <g fill="none" stroke="#0C0C0E" stroke-width="8" stroke-linecap="round">
+    <path d="M110.4 70.1 A38 38 0 1 0 110.4 129.9"/>
+    <path d="M131 60 L131 140"/>
+    <path d="M131 60 A20 20 0 0 1 131 100"/>
+  </g>
+</svg>

@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calvin Parra — kit de marca</title>
+<meta name="description" content="Manual de marca de Calvin Parra: monograma, paleta, tipografía y usos.">
+<meta name="theme-color" content="#0c0c0e">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/calvin.css?v=2">
+<style>
+.kit-hero { padding: 150px var(--gut) 80px; text-align: center; }
+.kit-hero h1 { font-size: clamp(44px, 9vw, 96px); margin-bottom: 18px; }
+.kit-hero img { width: 132px; margin: 0 auto 34px; }
+.kit-hero p { color: var(--paper-dim); max-width: 520px; margin: 0 auto; }
+
+.spec { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1px; background: var(--gold-soft); border: 1px solid var(--gold-soft); }
+.spec.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 860px) { .spec, .spec.three { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.spec > div { background: var(--ink); padding: 0; }
+.spec .frame { aspect-ratio: 1; display: grid; place-items: center; padding: 40px; }
+.spec .frame img { width: 100%; max-width: 132px; }
+.spec .cap { padding: 18px 22px; border-top: 1px solid var(--gold-soft); font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper-dim); }
+.on-gold { background: var(--gold); }
+.on-paper { background: var(--paper); }
+
+.swatch-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(215px, 1fr)); gap: 20px; }
+.sw { border: 1px solid var(--gold-soft); }
+.sw .fill { height: 165px; display: grid; place-items: center; font-size: 13px; letter-spacing: 0.16em; }
+.sw .info { padding: 18px 20px; }
+.sw h3 { font-size: 19px; margin-bottom: 8px; }
+.sw p { margin: 0; font-size: 15px; color: var(--paper-dim); }
+.sw code { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 12px; color: var(--gold); letter-spacing: 0.06em; }
+
+.type-spec { border-top: 1px solid var(--gold-soft); padding: 40px 0; display: grid; grid-template-columns: 1.2fr 1fr; gap: 34px; align-items: baseline; }
+.type-spec:last-child { border-bottom: 1px solid var(--gold-soft); }
+.type-spec .big { font-size: clamp(34px, 5.6vw, 62px); line-height: 1.02; color: var(--gold); }
+.type-spec h3 { font-size: 18px; margin-bottom: 8px; }
+.type-spec p { color: var(--paper-dim); font-size: 16px; margin: 0 0 10px; }
+.type-spec code { font-size: 12px; color: var(--gold); font-family: ui-monospace, Menlo, monospace; }
+
+.rules { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.rule { border: 1px solid var(--gold-soft); padding: 26px 28px; }
+.rule .tag { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 14px; display: block; }
+.rule.yes .tag { color: #7fae7a; }
+.rule.no .tag { color: #b56a5f; }
+.rule ul { margin: 0; padding-left: 20px; color: var(--paper-dim); font-size: 16px; }
+.rule li { margin-bottom: 8px; }
+
+.voice { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px; }
+.voice div { border-left: 1px solid var(--gold); padding: 4px 0 4px 22px; }
+.voice h3 { font-size: 21px; margin-bottom: 8px; }
+.voice p { color: var(--paper-dim); font-size: 16px; margin: 0; }
+
+.files { width: 100%; border-collapse: collapse; font-size: 15px; }
+.files th, .files td { text-align: left; padding: 14px 12px; border-bottom: 1px solid var(--gold-soft); }
+.files th { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--paper-dim); font-weight: 400; }
+.files td:first-child { font-family: ui-monospace, Menlo, monospace; font-size: 13px; color: var(--gold); }
+.files-wrap { overflow-x: auto; }
+
+@media (max-width: 760px) {
+  .type-spec, .rules { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <a href="index.html" class="brand">Calvin <em>Parra</em></a>
+  <ul id="menu">
+    <li><a href="#logo">Logo</a></li>
+    <li><a href="#color">Color</a></li>
+    <li><a href="#tipografia">Tipografía</a></li>
+    <li><a href="#usos">Usos</a></li>
+    <li><a href="index.html">Web</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">≡</button>
+</nav>
+
+<header class="kit-hero">
+  <img src="assets/brand/cp-monogram-gold.svg" alt="Monograma CP">
+  <h1>Kit de <em style="font-style:italic;color:var(--gold)">marca</em></h1>
+  <p>Sistema visual de Calvin Parra. Versión 01 — propuesta inicial, agosto 2026.</p>
+</header>
+
+<main>
+
+<section id="logo" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Identidad</p>
+      <h2>Monograma CP</h2>
+      <p>Una C y una P entrelazadas dentro de un círculo. Trazo fino, sin relleno: se lee igual en un avatar de 32 px que grabado en una tarjeta.</p>
+    </div>
+    <div class="spec reveal">
+      <div>
+        <div class="frame"><img src="assets/brand/cp-monogram-gold.svg" alt="Monograma en dorado"></div>
+        <div class="cap">Dorado sobre tinta · principal</div>
+      </div>
+      <div>
+        <div class="frame"><img src="assets/brand/cp-monogram-paper.svg" alt="Monograma en papel"></div>
+        <div class="cap">Papel sobre tinta · alto contraste</div>
+      </div>
+      <div>
+        <div class="frame on-gold"><img src="assets/brand/cp-monogram-ink.svg" alt="Monograma en tinta sobre dorado"></div>
+        <div class="cap">Tinta sobre dorado</div>
+      </div>
+      <div>
+        <div class="frame on-paper"><img src="assets/brand/cp-monogram-ink.svg" alt="Monograma en tinta sobre papel"></div>
+        <div class="cap">Tinta sobre papel · impresión</div>
+      </div>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:90px">
+      <p class="eyebrow">Logotipo</p>
+      <h2>Firma completa</h2>
+      <p>El nombre en Instrument Serif, con el apellido en cursiva. Debajo, los tres pilares en caja alta muy espaciada.</p>
+    </div>
+    <div class="reveal" style="border:1px solid var(--gold-soft);padding:clamp(34px,7vw,80px);text-align:center">
+      <div style="font-family:'Instrument Serif',serif;font-size:clamp(40px,7vw,76px);line-height:1.04">Calvin <em style="font-style:italic;color:var(--gold)">Parra</em></div>
+      <div class="pillars-line" style="justify-content:center;margin:22px 0 0">
+        <span>Luxury mindset</span><span>AI business</span><span>DJ soul</span>
+      </div>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:90px">
+      <p class="eyebrow">Símbolo</p>
+      <h2>El destello</h2>
+      <p>El ✦ que Calvin ya usa en su bio, redibujado. Sirve de viñeta, separador y favicon.</p>
+    </div>
+    <div class="spec three reveal">
+      <div>
+        <div class="frame"><img src="assets/brand/cp-mark-gold.svg" alt="Destello dorado" style="max-width:78px"></div>
+        <div class="cap">Dorado</div>
+      </div>
+      <div>
+        <div class="frame"><img src="assets/brand/cp-mark-paper.svg" alt="Destello papel" style="max-width:78px"></div>
+        <div class="cap">Papel</div>
+      </div>
+      <div>
+        <div class="frame on-gold"><img src="assets/brand/cp-mark-gold.svg" alt="Destello sobre dorado" style="max-width:78px;filter:brightness(0)"></div>
+        <div class="cap">Tinta sobre dorado</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="color">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Color</p>
+      <h2>Tinta, dorado y papel</h2>
+      <p>Tres tonos. El dorado no es decoración: marca solo lo que importa — un acento por pantalla.</p>
+    </div>
+    <div class="swatch-grid reveal">
+      <article class="sw">
+        <div class="fill" style="background:#0C0C0E;color:#ECE7DD">#0C0C0E</div>
+        <div class="info">
+          <h3>Tinta</h3>
+          <p><code>r 12 · g 12 · b 14</code></p>
+          <p style="margin-top:9px">Base de todo. Casi negro pero con un punto frío, para que el dorado no se vea sucio encima.</p>
+        </div>
+      </article>
+      <article class="sw">
+        <div class="fill" style="background:#C6A462;color:#0C0C0E">#C6A462</div>
+        <div class="info">
+          <h3>Dorado</h3>
+          <p><code>r 198 · g 164 · b 98</code></p>
+          <p style="margin-top:9px">Acento único. Un dorado apagado, no metálico: lujo por contención, no por brillo.</p>
+        </div>
+      </article>
+      <article class="sw">
+        <div class="fill" style="background:#ECE7DD;color:#0C0C0E">#ECE7DD</div>
+        <div class="info">
+          <h3>Papel</h3>
+          <p><code>r 236 · g 231 · b 221</code></p>
+          <p style="margin-top:9px">Blanco cálido para el texto. Nunca blanco puro — quema sobre fondo oscuro.</p>
+        </div>
+      </article>
+      <article class="sw">
+        <div class="fill" style="background:#8E8A83;color:#0C0C0E">#8E8A83</div>
+        <div class="info">
+          <h3>Gris apoyo</h3>
+          <p><code>r 142 · g 138 · b 131</code></p>
+          <p style="margin-top:9px">Texto secundario y metadatos. Auxiliar, no de marca.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="tipografia" class="alt">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Tipografía</p>
+      <h2>Serif editorial, sans neutra</h2>
+      <p>Deliberadamente opuesta a la de JAPI: allá todo es técnico y futurista; aquí es editorial y reposado.</p>
+    </div>
+    <div class="reveal">
+      <div class="type-spec">
+        <div class="big" style="font-family:'Instrument Serif',serif">Instrument Serif</div>
+        <div>
+          <h3>Titulares</h3>
+          <p>Serif de contraste alto. Solo un peso, regular y cursiva. La cursiva se reserva para el apellido y para acentuar una palabra por bloque.</p>
+          <code>400 · 400 italic</code>
+        </div>
+      </div>
+      <div class="type-spec">
+        <div class="big" style="font-family:'Inter',sans-serif;font-weight:300;letter-spacing:-0.02em">Inter</div>
+        <div>
+          <h3>Texto y navegación</h3>
+          <p>Sans neutra para párrafos, botones y menús. Pesos 200 a 400 — nunca bold: el énfasis se hace con color, no con grosor.</p>
+          <code>200 · 300 · 400</code>
+        </div>
+      </div>
+      <div class="type-spec">
+        <div class="big" style="font-family:'Inter',sans-serif;font-weight:400;font-size:clamp(14px,2vw,20px);letter-spacing:0.3em;text-transform:uppercase">Luxury mindset</div>
+        <div>
+          <h3>Etiquetas</h3>
+          <p>Caja alta, 11–12 px, interletrado de 0.2 a 0.32 em. Para antetítulos, botones y pies. Es lo que le da el aire de marca de lujo.</p>
+          <code>uppercase · letter-spacing 0.2–0.32em</code>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="usos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <p class="eyebrow">Usos</p>
+      <h2>Qué sí y qué no</h2>
+    </div>
+    <div class="rules reveal">
+      <div class="rule yes">
+        <span class="tag">Sí</span>
+        <ul>
+          <li>Dejar aire alrededor del monograma: mínimo la mitad de su diámetro.</li>
+          <li>Un solo acento dorado por pantalla.</li>
+          <li>Fondos oscuros por defecto; el papel se reserva para impresión.</li>
+          <li>Cursiva solo en el apellido o en una palabra por bloque.</li>
+        </ul>
+      </div>
+      <div class="rule no">
+        <span class="tag">No</span>
+        <ul>
+          <li>Rellenar el monograma ni engrosarle el trazo.</li>
+          <li>Degradados metálicos, sombras ni relieve sobre el dorado.</li>
+          <li>Mezclar el amarillo de JAPI con esta paleta.</li>
+          <li>Poner el monograma sobre foto sin una capa oscura debajo.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:90px">
+      <p class="eyebrow">Tono</p>
+      <h2>Cómo habla</h2>
+    </div>
+    <div class="voice reveal">
+      <div>
+        <h3>Corto</h3>
+        <p>Frases que caben en una respiración. Si sobra una palabra, sobra.</p>
+      </div>
+      <div>
+        <h3>Concreto</h3>
+        <p>Nada de "soluciones innovadoras". Se dice qué se hizo y para quién.</p>
+      </div>
+      <div>
+        <h3>Sin gritar</h3>
+        <p>Ni signos de exclamación ni mayúsculas de énfasis. El lujo no levanta la voz.</p>
+      </div>
+    </div>
+
+    <div class="section-head reveal" style="margin-top:90px">
+      <p class="eyebrow">Archivos</p>
+      <h2>Qué hay en el kit</h2>
+    </div>
+    <div class="files-wrap reveal">
+      <table class="files">
+        <thead>
+          <tr><th>Archivo</th><th>Qué es</th><th>Dónde va</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>cp-monogram-gold.svg</td><td>Monograma dorado</td><td>Web, avatar, firma</td></tr>
+          <tr><td>cp-monogram-paper.svg</td><td>Monograma claro</td><td>Sobre foto oscura</td></tr>
+          <tr><td>cp-monogram-ink.svg</td><td>Monograma en tinta</td><td>Sobre dorado o papel</td></tr>
+          <tr><td>cp-mark-gold.svg</td><td>Destello dorado</td><td>Viñeta, favicon</td></tr>
+          <tr><td>cp-mark-paper.svg</td><td>Destello claro</td><td>Separadores</td></tr>
+          <tr><td>calvin.css</td><td>Variables de color y tipografía</td><td>Cualquier web del sistema</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a href="index.html" class="brand">Calvin <em>Parra</em></a>
+    <div class="socials">
+      <a href="index.html">Web</a>
+      <a href="https://www.instagram.com/djcalvinparra/" target="_blank" rel="noopener">Instagram</a>
+      <a href="../">JAPI</a>
+    </div>
+    <small>Kit de marca v01 · agosto 2026 · propuesta</small>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('nav');
+const menu = document.getElementById('menu');
+const toggle = document.getElementById('navToggle');
+
+addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', scrollY > 20);
+}, { passive: true });
+
+toggle.addEventListener('click', () => {
+  const open = menu.classList.toggle('open');
+  toggle.setAttribute('aria-expanded', String(open));
+});
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.reveal').forEach((el, i) => {
+  el.style.transitionDelay = (i % 3) * 80 + 'ms';
+  io.observe(el);
+});
+</script>
+
+</body>
+</html>
