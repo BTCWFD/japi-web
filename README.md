@@ -24,11 +24,13 @@ Los dos sistemas son deliberadamente distintos: Calvin no debe leerse como sub-m
 
 ## Formularios
 
-No hay backend. Al enviar, ambos formularios componen el mensaje y abren el cliente de correo del visitante por `mailto:`. La dirección de destino está en una sola constante `DESTINO` al final de cada `index.html`; cambiarla es una línea.
+No hay backend. Al enviar, ambos formularios componen el mensaje y abren WhatsApp con el texto listo. El número está en una sola constante `WHATSAPP` al final de cada `index.html`; cambiarlo es una línea.
+
+Los dos sitios apuntan al mismo número, el de Calvin Parra, que hace de contacto tanto suyo como del colectivo.
 
 ## Pendientes
 
-- Dominio sin registrar. Los correos de destino (`hola@japi.fm`, `hola@calvinparra.com`) son provisionales.
+- Dominio sin registrar. `japi.com` está en venta en Afternic por 149.999 USD, así que la vía realista es `japi.fm`, libre. No hay correo publicado hasta entonces.
 - El retrato de Calvin viene de su Instagram, recomprimido a 1440 px. Reemplazar por el original.
 - `@royandi2` aparece en la info de JAPI pero su perfil es privado; queda solo el handle, sin datos.
 

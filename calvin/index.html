@@ -140,8 +140,8 @@
       <h2 style="font-size:clamp(30px,5vw,52px);margin-bottom:20px">Hablemos</h2>
       <p style="color:var(--paper-dim)">Bookings, consultoría en IA o colaboraciones de marca.</p>
       <ul class="contact-list">
+        <li><span>WhatsApp</span><a href="https://wa.me/573204936158" target="_blank" rel="noopener">+57 320 493 6158</a></li>
         <li><span>Instagram</span><a href="https://www.instagram.com/djcalvinparra/" target="_blank" rel="noopener">@djcalvinparra</a></li>
-        <li><span>Correo</span><a href="mailto:hola@calvinparra.com">hola@calvinparra.com</a></li>
         <li><span>Colectivo</span><a href="../">JAPI — los houseros de Bogotá</a></li>
       </ul>
     </div>
@@ -162,7 +162,7 @@
         <label for="m">Mensaje</label>
         <textarea id="m" name="mensaje"></textarea>
       </div>
-      <button type="submit" class="btn btn-solid">Enviar</button>
+      <button type="submit" class="btn btn-solid">Enviar por WhatsApp</button>
       <p id="formNote" style="color:var(--paper-dim);font-size:15px;margin-top:14px"></p>
     </form>
   </div>
@@ -218,7 +218,7 @@ document.querySelectorAll('.reveal').forEach((el, i) => {
   io.observe(el);
 });
 
-const DESTINO = 'hola@calvinparra.com';
+const WHATSAPP = '573204936158';
 
 document.getElementById('contactForm').addEventListener('submit', e => {
   e.preventDefault();
@@ -231,8 +231,9 @@ document.getElementById('contactForm').addEventListener('submit', e => {
     return;
   }
 
-  const asunto = val('a') ? `Calvin Parra · ${val('a')}` : 'Calvin Parra · contacto desde la web';
-  const cuerpo = [
+  const texto = [
+    'Hola Calvin, escribo desde tu web.',
+    '',
     `Nombre: ${val('n')}`,
     `Correo: ${val('e')}`,
     val('a') ? `Motivo: ${val('a')}` : null,
@@ -240,8 +241,8 @@ document.getElementById('contactForm').addEventListener('submit', e => {
     val('m') || '(sin mensaje)'
   ].filter(l => l !== null).join('\n');
 
-  location.href = `mailto:${DESTINO}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
-  nota.textContent = `Se abrió tu correo con el mensaje listo para ${DESTINO}. Si no pasó nada, escribe directo a esa dirección.`;
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
+  nota.textContent = 'Se abrió WhatsApp con el mensaje listo. Si no pasó nada, escribe al +57 320 493 6158.';
 });
 </script>
 
