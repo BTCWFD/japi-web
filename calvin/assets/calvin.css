@@ -47,6 +47,32 @@ a {
   text-decoration: none;
 }
 
+/* Foco solo para teclado. Sin esto no se ve donde esta uno al tabular:
+   el fondo oscuro se come el anillo por defecto del navegador. */
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+.skip-link {
+  position: absolute;
+  left: 50%;
+  top: 8px;
+  transform: translate(-50%, -160%);
+  z-index: 100;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  padding: 14px 26px;
+  transition: transform 0.2s;
+}
+
+.skip-link:focus {
+  transform: translate(-50%, 0);
+}
+
 img {
   max-width: 100%;
   display: block;
@@ -270,7 +296,9 @@ section {
   margin-bottom: 20px;
 }
 
-.section-head p {
+/* El :not(.eyebrow) es deliberado: un selector como ".section-head p" gana
+   por especificidad a ".eyebrow" y le roba el dorado al antetitulo. */
+.section-head p:not(.eyebrow) {
   color: var(--paper-dim);
   margin: 0;
 }
@@ -322,7 +350,7 @@ section {
   align-items: center;
 }
 
-.bio p {
+.bio p:not(.eyebrow) {
   color: var(--paper-dim);
 }
 
