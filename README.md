@@ -22,15 +22,18 @@ python -m http.server 5173
 
 Los dos sistemas son deliberadamente distintos: Calvin no debe leerse como sub-marca de JAPI.
 
+## Formularios
+
+No hay backend. Al enviar, ambos formularios componen el mensaje y abren el cliente de correo del visitante por `mailto:`. La dirección de destino está en una sola constante `DESTINO` al final de cada `index.html`; cambiarla es una línea.
+
 ## Pendientes
 
-- Dominio sin registrar. Los correos de contacto son provisionales.
-- Los formularios no tienen backend; avisan en pantalla al enviar.
-- Varias cuentas de la sección "el colectivo" están marcadas como *por confirmar*.
-- El retrato de Calvin viene de su Instagram, recomprimido. Reemplazar por el original.
+- Dominio sin registrar. Los correos de destino (`hola@japi.fm`, `hola@calvinparra.com`) son provisionales.
+- El retrato de Calvin viene de su Instagram, recomprimido a 1440 px. Reemplazar por el original.
+- `@royandi2` aparece en la info de JAPI pero su perfil es privado; queda solo el handle, sin datos.
 
 ## Archivos no versionados
 
-`brand/` contiene el kit original de JAPI (`.ai`, `.eps`, PDF y el ZIP recibido). Son archivos propietarios del cliente y están excluidos en `.gitignore`.
+`brand/` contiene el kit original de JAPI (`.ai`, `.eps`, PDF y el ZIP recibido) más la tipografía de uso personal. Son archivos propietarios o no redistribuibles, excluidos en `.gitignore`.
 
-Las tipografías bajo `assets/fonts/` llegaron dentro de ese kit **sin archivos de licencia**. Antes de publicar el sitio hay que verificar que su licencia permita incrustarlas en web.
+Las licencias de las tres tipografías están verificadas y documentadas en [FUENTES.md](FUENTES.md).

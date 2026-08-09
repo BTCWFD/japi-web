@@ -117,15 +117,15 @@
         <span class="handle">@capriclub_official</span>
         <div>
           <h3>Capri Club</h3>
-          <p>Por confirmar el rol exacto dentro del proyecto.</p>
+          <p>Club en la Zona T de Bogotá, calle 83 # 12A-36. Opera bajo Solid Ground.</p>
         </div>
         <span class="arrow">→</span>
       </a>
       <a class="project" href="https://www.instagram.com/solidground_colombia/" target="_blank" rel="noopener">
         <span class="handle">@solidground_colombia</span>
         <div>
-          <h3>Solid Ground Colombia</h3>
-          <p>Por confirmar el rol exacto dentro del proyecto.</p>
+          <h3>Solid Ground</h3>
+          <p>Promotora detrás de Capri e Incógnito. Ha traído a Black Coffee, Sasha, tINI y Circoloco.</p>
         </div>
         <span class="arrow">→</span>
       </a>
@@ -218,10 +218,30 @@ document.querySelectorAll('.reveal').forEach((el, i) => {
   io.observe(el);
 });
 
+const DESTINO = 'hola@calvinparra.com';
+
 document.getElementById('contactForm').addEventListener('submit', e => {
   e.preventDefault();
-  document.getElementById('formNote').textContent =
-    'El formulario todavía no está conectado a un backend.';
+  const form = e.target;
+  const nota = document.getElementById('formNote');
+  const val = id => form.querySelector('#' + id).value.trim();
+
+  if (!val('n') || !val('e')) {
+    nota.textContent = 'Falta tu nombre o tu correo.';
+    return;
+  }
+
+  const asunto = val('a') ? `Calvin Parra · ${val('a')}` : 'Calvin Parra · contacto desde la web';
+  const cuerpo = [
+    `Nombre: ${val('n')}`,
+    `Correo: ${val('e')}`,
+    val('a') ? `Motivo: ${val('a')}` : null,
+    '',
+    val('m') || '(sin mensaje)'
+  ].filter(l => l !== null).join('\n');
+
+  location.href = `mailto:${DESTINO}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+  nota.textContent = `Se abrió tu correo con el mensaje listo para ${DESTINO}. Si no pasó nada, escribe directo a esa dirección.`;
 });
 </script>
 

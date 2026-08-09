@@ -28,12 +28,10 @@
   font-weight: 900;
   font-display: swap;
 }
-@font-face {
-  font-family: "Display TFB";
-  src: url("../fonts/digital display tfb.ttf") format("truetype");
-  font-weight: 400;
-  font-display: swap;
-}
+/* "digital display tfb" (Kaiser Zhar Khan) es de uso personal unicamente:
+   no se incrusta ni se distribuye con el sitio. Los bloques que la usaban
+   caen a Audiowide, la tipografia principal del manual. Si se compra la
+   licencia comercial, basta con reponer aqui el @font-face. */
 
 :root {
   --yellow: #fdd20e;
@@ -609,7 +607,7 @@ section {
 }
 
 .f-display {
-  font-family: "Display TFB", sans-serif;
+  font-family: "Display TFB", "Audiowide", sans-serif;
 }
 
 .type-row h3 {

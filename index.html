@@ -10,7 +10,7 @@
 <meta property="og:description" content="Colectivo de música house de Bogotá. Uploading 70% the originals.">
 <meta property="og:image" content="assets/img/japi-redes.png">
 <link rel="icon" href="assets/img/japi-redes.png">
-<link rel="stylesheet" href="assets/css/japi.css">
+<link rel="stylesheet" href="assets/css/japi.css?v=2">
 </head>
 <body>
 
@@ -71,34 +71,34 @@
   <div class="wrap" style="margin-top:clamp(56px,9vw,96px)">
     <div class="section-head reveal">
       <p class="eyebrow">Quiénes están detrás</p>
-      <h2>La info del perfil</h2>
-      <p>Las cuentas que JAPI lista en su bio de Instagram. Falta confirmar cuáles son miembros y cuáles son club o proyecto aliado.</p>
+      <h2>Quiénes suenan</h2>
+      <p>Las cuentas que JAPI lista en su bio de Instagram: los DJs del colectivo y las casas donde tocan.</p>
     </div>
     <div class="sets reveal">
       <a class="set-card" href="https://www.instagram.com/djcalvinparra/" target="_blank" rel="noopener">
-        <h3>@djcalvinparra</h3>
-        <p>Calvin Parra. Luxury mindset, AI business, DJ soul.</p>
-        <div class="tags"><span class="tag">DJ</span></div>
+        <h3>Calvin Parra</h3>
+        <p>DJ. Luxury mindset, AI business, DJ soul. Tiene su propia marca y web.</p>
+        <div class="tags"><span class="tag">DJ</span><span class="tag">@djcalvinparra</span></div>
+      </a>
+      <a class="set-card" href="https://www.instagram.com/piperico.music/" target="_blank" rel="noopener">
+        <h3>Pipe Rico</h3>
+        <p>DJ y productor colombiano. Residente de JAPI, y organizador y curador de eventos.</p>
+        <div class="tags"><span class="tag">Residente</span><span class="tag">@piperico.music</span></div>
       </a>
       <a class="set-card" href="https://www.instagram.com/asaint.msc/" target="_blank" rel="noopener">
-        <h3>@asaint.msc</h3>
-        <p>Por confirmar.</p>
-        <div class="tags"><span class="tag">Por confirmar</span></div>
+        <h3>Alexander Sánchez</h3>
+        <p>DJ de música electrónica y oficial militar. Detrás de los proyectos AÏRA y Dusol.</p>
+        <div class="tags"><span class="tag">DJ</span><span class="tag">@asaint.msc</span></div>
+      </a>
+      <a class="set-card" href="https://www.instagram.com/octavaclub/" target="_blank" rel="noopener">
+        <h3>Octava Club</h3>
+        <p>Casa habitual del colectivo. Carrera 8 # 63-41, Bogotá. 157 mil seguidores.</p>
+        <div class="tags"><span class="tag">Club</span><span class="tag">@octavaclub</span></div>
       </a>
       <a class="set-card" href="https://www.instagram.com/royandi2/" target="_blank" rel="noopener">
         <h3>@royandi2</h3>
-        <p>Por confirmar.</p>
-        <div class="tags"><span class="tag">Por confirmar</span></div>
-      </a>
-      <a class="set-card" href="https://www.instagram.com/octavaclub/" target="_blank" rel="noopener">
-        <h3>@octavaclub</h3>
-        <p>Club. Aparece también en los flyers del feed.</p>
-        <div class="tags"><span class="tag">Venue</span></div>
-      </a>
-      <a class="set-card" href="https://www.instagram.com/piperico.music/" target="_blank" rel="noopener">
-        <h3>@piperico.music</h3>
-        <p>Por confirmar.</p>
-        <div class="tags"><span class="tag">Por confirmar</span></div>
+        <p>Perfil privado. Aparece en la info de JAPI, sin datos públicos.</p>
+        <div class="tags"><span class="tag">Privado</span></div>
       </a>
     </div>
   </div>
@@ -155,10 +155,11 @@
         </div>
       </div>
       <div class="type-row">
-        <div class="sample f-display">Display TFB</div>
+        <div class="sample f-display">digital display tfb</div>
         <div>
           <h3>Display</h3>
           <p>Concepto de pantalla segmentada. Para dar variedad a los títulos.</p>
+          <p style="margin-top:10px;font-size:15px;color:var(--yellow-dim)">Licencia de uso personal: no se incrusta en la web. Aquí se muestra con Audiowide. Para usarla en piezas comerciales hay que comprar la licencia al autor.</p>
         </div>
       </div>
     </div>
@@ -276,10 +277,30 @@ document.querySelectorAll('.reveal').forEach((el, i) => {
   io.observe(el);
 });
 
+const DESTINO = 'hola@japi.fm';
+
 document.getElementById('bookingForm').addEventListener('submit', e => {
   e.preventDefault();
-  document.getElementById('formNote').textContent =
-    'El formulario todavía no está conectado a un backend.';
+  const form = e.target;
+  const nota = document.getElementById('formNote');
+  const val = id => form.querySelector('#' + id).value.trim();
+
+  if (!val('n') || !val('e')) {
+    nota.textContent = 'Falta tu nombre o tu correo.';
+    return;
+  }
+
+  const asunto = val('a') ? `JAPI · ${val('a')}` : 'JAPI · contacto desde la web';
+  const cuerpo = [
+    `Nombre: ${val('n')}`,
+    `Correo: ${val('e')}`,
+    val('a') ? `Asunto: ${val('a')}` : null,
+    '',
+    val('m') || '(sin mensaje)'
+  ].filter(l => l !== null).join('\n');
+
+  location.href = `mailto:${DESTINO}?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`;
+  nota.textContent = `Se abrió tu correo con el mensaje listo para ${DESTINO}. Si no pasó nada, escríbenos directo a esa dirección.`;
 });
 </script>
 
