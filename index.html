@@ -10,9 +10,17 @@
 <meta property="og:description" content="Colectivo de música house de Bogotá. Uploading 70% the originals.">
 <meta property="og:image" content="assets/img/japi-redes.png">
 <link rel="icon" href="assets/img/japi-redes.png">
-<link rel="stylesheet" href="assets/css/japi.css?v=3">
+<link rel="stylesheet" href="assets/css/japi.css?v=5">
 </head>
 <body>
+
+<div class="intro" id="intro" aria-hidden="true">
+  <div class="intro-stage">
+    <div class="glow glow-azul"></div>
+    <div class="glow glow-vino"></div>
+    <img class="intro-logo" src="assets/img/japi-completo-amarillo.png" alt="">
+  </div>
+</div>
 
 <a class="skip-link" href="#colectivo">Saltar al contenido</a>
 
@@ -43,6 +51,8 @@
     </div>
   </div>
   <div class="ticker" aria-hidden="true">
+    <div class="ticker-glow-azul"></div>
+    <div class="ticker-glow-vino"></div>
     <div class="ticker-track">
       <span>· house</span><span>· bogotá</span><span>· originals</span><span>· cabina</span><span>· pista</span><span>· japi</span>
       <span>· house</span><span>· bogotá</span><span>· originals</span><span>· cabina</span><span>· pista</span><span>· japi</span>
@@ -245,6 +255,114 @@
 </footer>
 
 <script>
+// Intro: bloquea el scroll mientras corre y se retira sola al terminar.
+// Cualquier interaccion la salta, para no secuestrar a quien ya la vio.
+(() => {
+  const intro = document.getElementById('intro');
+  if (!intro) return;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const cerrar = () => {
+    if (!intro.isConnected) return;
+    intro.remove();
+    document.body.classList.remove('intro-activa');
+  };
+
+  if (reduce) { cerrar(); return; }
+
+  document.body.classList.add('intro-activa');
+  intro.addEventListener('animationend', e => {
+    if (e.animationName === 'intro-out') cerrar();
+  });
+  ['pointerdown', 'keydown', 'wheel', 'touchstart'].forEach(ev =>
+    addEventListener(ev, cerrar, { once: true, passive: true })
+  );
+  // Red de seguridad: si la animacion no dispara su evento, no dejamos la
+  // capa tapando la web para siempre.
+  setTimeout(cerrar, 4000);
+})();
+
+// Logo y ticker reaccionan al cursor con profundidad simulada en CSS puro
+// (rotateX/rotateY/translateZ), sin motor 3D externo. El logo se inclina
+// hacia el puntero; en el ticker, el cursor actua como un foco de enfoque
+// horizontal: las palabras cercanas quedan nitidas, las lejanas se
+// difuminan, y dos brillos azul/vinotinto lo acompañan.
+// Se desactiva por completo con movimiento reducido o sin puntero fino
+// (movil/tactil), donde el estado de reposo ya se ve bien sin JS.
+(() => {
+  const hero = document.querySelector('.hero');
+  const logo = document.querySelector('.hero img.mark');
+  const ticker = document.querySelector('.ticker');
+  const track = document.querySelector('.ticker-track');
+  if (!hero || !logo || !ticker || !track) return;
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const fino = matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (reduce || !fino) return;
+
+  const spans = [...track.querySelectorAll('span')];
+  const glowAzul = ticker.querySelector('.ticker-glow-azul');
+  const glowVino = ticker.querySelector('.ticker-glow-vino');
+
+  let clientX = 0, clientY = 0, activo = false, raf = null;
+
+  const pedirFrame = () => { if (!raf) raf = requestAnimationFrame(tick); };
+
+  hero.addEventListener('pointermove', e => {
+    clientX = e.clientX;
+    clientY = e.clientY;
+    activo = true;
+    pedirFrame();
+  });
+
+  hero.addEventListener('pointerleave', () => {
+    activo = false;
+    logo.style.transform = '';
+    glowAzul.style.opacity = 0;
+    glowVino.style.opacity = 0;
+    spans.forEach(s => { s.style.transform = ''; s.style.filter = ''; s.style.opacity = ''; });
+  });
+
+  function tick() {
+    raf = null;
+    if (!activo) return;
+
+    const hr = hero.getBoundingClientRect();
+    const px = (clientX - hr.left) / hr.width;
+    const py = (clientY - hr.top) / hr.height;
+
+    logo.style.transform =
+      `rotateX(${(0.5 - py) * 14}deg) rotateY(${(px - 0.5) * 16}deg) translateZ(18px)`;
+
+    const tr = ticker.getBoundingClientRect();
+    if (clientY >= tr.top - 90 && clientY <= tr.bottom + 90) {
+      spans.forEach(s => {
+        const sr = s.getBoundingClientRect();
+        const centro = sr.left + sr.width / 2;
+        // dist va de 0 (bajo el cursor) a 1 (a 340px o mas): las cuatro
+        // propiedades se calculan sobre esa misma escala para que el giro
+        // quede acotado igual que el desenfoque y la opacidad, en vez de
+        // crecer sin tope con la distancia en pixeles.
+        const dist = Math.min(Math.abs(clientX - centro) / 340, 1);
+        const signo = centro >= clientX ? -1 : 1;
+        s.style.transform =
+          `translateZ(${(1 - dist) * 30}px) rotateY(${signo * dist * 22}deg) scale(${1 + (1 - dist) * 0.16})`;
+        s.style.filter = `blur(${dist * 2.2}px)`;
+        s.style.opacity = 1 - dist * 0.55;
+      });
+      glowAzul.style.left = (clientX - tr.left - 130) + 'px';
+      glowAzul.style.opacity = 0.85;
+      glowVino.style.left = (clientX - tr.left - 30) + 'px';
+      glowVino.style.opacity = 0.7;
+    } else {
+      glowAzul.style.opacity = 0;
+      glowVino.style.opacity = 0;
+    }
+
+    if (activo) raf = requestAnimationFrame(tick);
+  }
+})();
+
 const nav = document.getElementById('nav');
 const menu = document.getElementById('menu');
 const toggle = document.getElementById('navToggle');

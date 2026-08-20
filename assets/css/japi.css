@@ -159,6 +159,117 @@ img {
   mask-image: radial-gradient(ellipse 90% 70% at 50% 40%, #000 30%, transparent 100%);
 }
 
+/* --- intro 3D --- */
+/* Los destellos azul y vinotinto no son colores de marca: leen como luz de
+   club sobre el Midnight Sky, que es justo lo que el manual pide del fondo
+   oscuro. Van muy difuminados y a baja opacidad para que no compitan con
+   el amarillo del logo. */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: grid;
+  place-items: center;
+  background: var(--midnight);
+  perspective: 1100px;
+  animation: intro-out 0.85s ease 2.05s both;
+}
+
+.intro-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  transform-style: preserve-3d;
+}
+
+.intro-logo {
+  position: relative;
+  z-index: 2;
+  width: min(52vw, 380px);
+  animation: intro-drop 1.35s cubic-bezier(0.16, 0.84, 0.32, 1) both;
+}
+
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(64px);
+  opacity: 0;
+  animation: glow-pulse 2.3s ease both;
+}
+
+.glow-azul {
+  --tx: -16%;
+  --ty: -12%;
+  --tz: -140px;
+  width: 62vmin;
+  height: 62vmin;
+  background: radial-gradient(circle, rgba(46, 108, 255, 0.5), transparent 70%);
+  animation-delay: 0.3s;
+}
+
+.glow-vino {
+  --tx: 18%;
+  --ty: 14%;
+  --tz: -180px;
+  width: 54vmin;
+  height: 54vmin;
+  background: radial-gradient(circle, rgba(140, 32, 68, 0.55), transparent 70%);
+  animation-delay: 0.5s;
+}
+
+@keyframes intro-drop {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -44vh, 380px) rotateX(38deg) scale(1.2);
+    filter: blur(7px);
+  }
+  50% {
+    opacity: 1;
+  }
+  75%,
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotateX(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes glow-pulse {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--tx), var(--ty), var(--tz)) scale(0.65);
+  }
+  45% {
+    opacity: 0.9;
+    transform: translate3d(var(--tx), var(--ty), var(--tz)) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(var(--tx), var(--ty), var(--tz)) scale(1.22);
+  }
+}
+
+@keyframes intro-out {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Mientras corre la intro el fondo no debe poder desplazarse. */
+body.intro-activa {
+  overflow: hidden;
+}
+
+/* Con movimiento reducido la intro no aparece siquiera: una caida en 3D es
+   exactamente el tipo de animacion que puede marear. */
+@media (prefers-reduced-motion: reduce) {
+  .intro {
+    display: none;
+  }
+}
+
 /* --- nav --- */
 .nav {
   position: fixed;
@@ -283,12 +394,18 @@ img {
 .hero-inner {
   position: relative;
   max-width: 900px;
+  /* Perspectiva para que el logo se sienta como un objeto flotando, no
+     solo girando plano. Va aqui, en el padre directo, porque perspective
+     define el espacio 3D para los HIJOS del elemento que la lleva. */
+  perspective: 900px;
 }
 
 .hero img.mark {
   width: clamp(150px, 24vw, 235px);
   margin: 0 auto 34px;
   filter: drop-shadow(0 0 46px rgba(253, 210, 14, 0.35));
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
 }
 
 .hero h1 {
@@ -326,7 +443,39 @@ img {
   padding: 12px 0;
 }
 
+/* Los mismos azul y vinotinto de la intro, aqui como un foco de luz que
+   sigue al cursor por dentro del ticker. Se quedan en 0 de opacidad hasta
+   que el JS los activa; el overflow:hidden del .ticker los recorta en
+   franjas horizontales en vez de circulos completos, que es justo el
+   efecto de "luz de club" que se busca. */
+.ticker-glow-azul,
+.ticker-glow-vino {
+  position: absolute;
+  top: 50%;
+  width: 320px;
+  height: 170px;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(42px);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  transform: translate(-50%, -50%);
+}
+
+.ticker-glow-azul {
+  background: radial-gradient(circle, rgba(46, 108, 255, 0.55), transparent 70%);
+}
+
+.ticker-glow-vino {
+  background: radial-gradient(circle, rgba(140, 32, 68, 0.55), transparent 70%);
+}
+
 .ticker-track {
+  position: relative;
+  z-index: 1;
+  /* z-index explicito para que el texto quede siempre encima de los
+     brillos: un elemento posicionado con z-index (aunque sea 1) pinta
+     despues que uno con z-index:auto, sin importar el orden en el HTML. */
   display: flex;
   gap: 46px;
   width: max-content;
@@ -337,6 +486,15 @@ img {
   text-transform: uppercase;
   color: var(--yellow-dim);
   white-space: nowrap;
+  /* Perspectiva para las palabras: viven aqui, en el padre directo de los
+     <span>, para que su rotateY/translateZ individual sea correcto. */
+  perspective: 700px;
+}
+
+.ticker-track span {
+  display: inline-block;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), filter 0.28s ease,
+    opacity 0.28s ease;
 }
 
 @keyframes slide {

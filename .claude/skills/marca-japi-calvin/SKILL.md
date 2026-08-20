@@ -48,6 +48,19 @@ Estas costaron trabajo averiguarlas y romperlas tiene consecuencias reales.
 
 **El repo es público** en https://github.com/BTCWFD/japi-web y se publica en https://btcwfd.github.io/japi-web/. Todo lo que commitees queda a la vista, incluido el retrato de Calvin.
 
+## Profundidad 3D con CSS puro
+
+JAPI tuvo una tentación real de meter Spline/Three.js para efectos 3D (referencias externas con modelos `.glb` y texturas comprimidas, varios MB de motor WebGL). Se descartó a propósito: rompe la regla de que la marca es ligera y no depende de nada externo. En su lugar hay dos piezas de profundidad simulada solo con CSS, sin librerías:
+
+- **La intro** (`#intro` en `index.html`) — el logo cae con `perspective`/`rotateX` y dos brillos azul/vinotinto que se desvanecen, una sola vez al cargar.
+- **El logo del hero y el ticker** (`· house · bogotá · originals · cabina · pista · japi`) — reaccionan de forma continua al cursor: el logo se inclina hacia el puntero, y en el ticker el cursor actúa como foco de enfoque horizontal — las palabras cerca del cursor quedan nítidas y las lejanas se difuminan, con los mismos dos brillos seleccionados.
+
+El azul y el vinotinto **no son colores de marca** — no los actualices en la tabla de arriba ni los uses en botones o texto. Se justifican solo como "luz de club" sobre el Midnight Sky, en manchas muy difuminadas (`blur` alto) y baja opacidad, nunca como color plano. Si se necesita un tercer sitio para este mismo efecto, reutiliza esos mismos dos tonos — no inventes otro color ahí.
+
+Patrón técnico a seguir si tocas o repites esto: todo cálculo por cursor va con **el mismo `dist` normalizado (0 a 1)** aplicado a escala, blur, opacidad y giro — un bug real de esta implementación fue dejar el `rotateY` sin acotar (crecía con la distancia en píxeles sin tope), mientras las demás propiedades sí estaban entre 0 y 1; una palabra lejana o aún fuera de pantalla en el carrusel podía girar 50°+. El efecto se desactiva por completo (no se degrada, se corta de raíz con un `return` temprano) bajo `prefers-reduced-motion: reduce` y en dispositivos sin `hover:hover`+`pointer:fine` — en esos casos el estado de reposo sin JS ya se ve bien y no debe depender de que el script corra.
+
+**Para verificar esto en el navegador de vista previa:** la herramienta de automatización sí dispara `pointermove` real con `hover`, pero si lees el valor inline (`el.style.transform`) en la misma llamada, puede seguir vacío por leer antes de que corra el primer `requestAnimationFrame` — espera un `setTimeout` corto o dos `requestAnimationFrame` encadenados antes de comprobar el resultado.
+
 ## Contacto
 
 Ambas webs contactan por **WhatsApp**, no por correo. El número es de Calvin y atiende las dos marcas. Está en una constante `WHATSAPP` al final de cada `index.html`; cambiarlo es una línea por archivo.
